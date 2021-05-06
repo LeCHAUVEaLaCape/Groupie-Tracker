@@ -1,0 +1,11 @@
+2021/05/04 14:02:10 template: index.html:76:28: executing "index.html" at <.Locations>: can't evaluate field Locations in type []main.Artists
+2021/05/04 14:02:11 template: index.html:76:28: executing "index.html" at <.Locations>: can't evaluate field Locations in type []main.Artists
+2021/05/04 14:02:54 template: index.html:76:28: executing "index.html" at <.Locations>: can't evaluate field Locations in type []main.Artists
+2021/05/04 14:02:55 template: index.html:76:28: executing "index.html" at <.Locations>: can't evaluate field Locations in type []main.Artists
+2021/05/04 14:03:16 template: index.html:31:28: executing "index.html" at <.Locations>: can't evaluate field Locations in type []main.Artists
+2021/05/04 14:03:16 template: index.html:31:28: executing "index.html" at <.Locations>: can't evaluate field Locations in type []main.Artists
+2021/05/04 14:16:52 template: index.html:82:28: executing "index.html" at <.Locations>: range can't iterate over https://groupietrackers.herokuapp.com/api/locations/1
+2021/05/04 14:16:53 template: index.html:82:28: executing "index.html" at <.Locations>: range can't iterate over https://groupietrackers.herokuapp.com/api/locations/1
+2021/05/06 13:49:22 listen tcp :8081: bind: Une seule utilisation de chaque adresse de socket (protocole/adresse réseau/port) est habituellement autorisée.
+2021/05/06 16:57:38 write tcp 127.0.0.1:8080->127.0.0.1:50733: wsasend: Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte.
+2021/05/06 17:06:32 write tcp 127.0.0.1:8080->127.0.0.1:50865: wsasend: Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte.
