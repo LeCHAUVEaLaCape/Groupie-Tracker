@@ -1,14 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Groupie Tracker</title>
-      <link rel="stylesheet" type="text/css" href="/CSS/index.css">
-      <link rel="icon" href="CSS/logomusique.png">
-      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    </head>
-    <body>
-      <nav class="menu-nav">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/index.css">
+    <link rel="icon" href="CSS/logomusique.png">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+    <nav class="menu-nav">
         <section class="navbar">
           <a type="image" href="#">
             <img src="/CSS/logomusique.png" alt="logo" width="50px">
@@ -25,91 +29,67 @@
             </li>
           </ul>
         </section>
-      </nav>
-      <section class="headtitle">
+    </nav>
+
+    <section class="headtitle">
         <h1 class="head">WELCOME !</h2>
-      </section>
-      <input type="text" placeholder="" id="inputRecherche">
-      <button type="button" onclick="getValue();">Recherche</button>
-      <div id="artcl"></div>
+    </section>
 
-      <section id="clone" class="modal">
-        <div class="imagetest">
-          <img src="CSS/logomusique.png" style="width:30%;cursor:zoom-in" onclick="document.getElementById('id01').style.display='block'">
-        </div>
-        <div id="id01" class="w3-modal">
-          <div class="w3-modal-content w3-animate-zoom">
-            <header class="w3-container w3-black"> 
-              <span onclick="document.getElementById('id01').style.display='none'" 
-              class="w3-button w3-display-topright">&times;</span>
-              <h2>Artiste</h2>
-            </header>
-            <div class="w3-container">
-              <img src="/th.jpg" id="getImage">
+    <input type="text" placeholder="" id="inputRecherche">
+    <button type="button" onclick="getValue();">Recherche</button>
+
+    <div id="cards" class="row">
+        {{range .}}
+        <div class="col">
+            <div style="width: 250px;">
+                <img id="img" src={{.Image}} class="card-img-top" alt={{.Name}} onclick="document.getElementById('{{.Id}}').style.display='block'">
+                <section class="modal">
+                    <div id="{{.Id}}" class="w3-modal">
+                        <div class="w3-modal-content w3-animate-zoom">
+                            <header class="w3-container w3-black"> 
+                                <span onclick="document.getElementById('{{.Id}}').style.display='none'" 
+                                    class="w3-button w3-display-topright">&times;
+                                </span>
+                                <h2>Artiste</h2>
+                            </header>
+                            <div class="w3-container">
+                                <img src="{{.Image}}" alt="image">
+                            </div>
+                            <footer class="w3-container w3-black">
+                                <div class="write"> 
+                                    <h2>.</h2>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </section>
+                <div style="font-size: 30px;">{{.Name}}</div>
             </div>
-            <footer class="w3-container w3-black">
-              <div class="write"> 
-               <h2>.</h2>
-              </div>
-            </footer>
         </div>
-      </div>
-      </section>
+    </div>
+    <div>
+        {{end}}
+    </div>
 
-      <script>
-        var data = {{.}};  //Fausse alerte
-        function tester(){
-          document.getElementById('id01').style.display='block'
+    <script>
+        // Get the modal
+        var modal = document.getElementById('{{.Id}}');
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
-
-        function display(element){
-          let cible = document.getElementById("artcl")
-          let clone = document.getElementById("clone").cloneNode(true)
-          clone.id = element.id
-
-          let img = clone.querySelector("div")
-          img.firstElementChild.src = element.image
-
-          img = [...clone.querySelectorAll("div")][1] // de la merde?
-          img.id = `inner${element.id}`
-
-          img = document.getElementById("getImage")
-          img.src = element.image
-          cible.appendChild(clone)
-        }
-
-        for (let e of data){
-          display(e)
-        }  
-        // BUG
         function getValue(){
-          var input = document.getElementById("inputRecherche").value;
-          // Effacer tout les images
-          // BUG ICI
-          let tmp = [...document.querySelectorAll("#artist")]
-          for (let i in tmp){
-              tmp[i].remove()
-          }
-          // Afficher
-          function testMajuscule(element){
+            var input = document.getElementById("inputRecherche").value;
+            // Effacer tout les images
+            // BUG ICI
+            let tmp = [...document.querySelectorAll("#artist")]
             for (let i in tmp){
-              let modifier = input.slice(0,i)+input.charAt(i).toUpperCase()
-              if(i!=tmp.length-1) modifier += input.slice(i+1)
-              if(new RegExp(modifier).test(element.name)){
-                display(element)
-                return
-              }
+                tmp[i].remove()
             }
-            if (new RegExp(input.toUpperCase()).test(element.name)) display(element)
-          }
-          for(let e of data){
-            if (new RegExp(input).test(e.name)){
-              display(e)
-            }else{
-              testMajuscule(e)
-            }
-          }
         }
-      </script>
-    </body>
-  </html>
+    </script>
+</body>
+
+</html>
