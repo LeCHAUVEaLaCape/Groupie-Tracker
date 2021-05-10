@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/index.css">
+    <link rel="icon" href="CSS/logomusique.png">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+
+<body>
+    <nav class="menu-nav">
+        <section class="navbar">
+          <a type="image" href="#">
+            <img src="/CSS/logomusique.png" alt="logo" width="50px">
+          </a>
+          <ul>
+            <li class="btn">
+              <a href="#">Home</a>
+            </li>
+            <li class="btn">
+              <a href="">Other</a>
+            </li>
+            <li class="btn">
+              <a href="">Other</a>
+            </li>
+          </ul>
+        </section>
+    </nav>
+
+    <section class="headtitle">
+        <h1 class="head">WELCOME !</h2>
+    </section>
+
+    <input type="text" placeholder="" id="inputRecherche">
+    <button type="button" onclick="getValue();">Recherche</button>
+
+    <div id="cards" class="row">
+        {{range .}}
+        <div class="col">
+            <div style="width: 250px;">
+                <img id="img" src={{.Image}} class="card-img-top" alt={{.Name}} onclick="document.getElementById('{{.Id}}').style.display='block'">
+                <section class="modal">
+                    <div id="{{.Id}}" class="w3-modal">
+                        <div class="w3-modal-content w3-animate-zoom">
+                            <header class="w3-container w3-black"> 
+                                <span onclick="document.getElementById('{{.Id}}').style.display='none'" 
+                                    class="w3-button w3-display-topright">&times;
+                                </span>
+                                <h2>Artiste</h2>
+                            </header>
+                            <div class="w3-container">
+                                <img src="{{.Image}}" alt="image">
+                            </div>
+                            <footer class="w3-container w3-black">
+                                <div class="write"> 
+                                    <h2>.</h2>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </section>
+                <div style="font-size: 30px;">{{.Name}}</div>
+            </div>
+        </div>
+    </div>
+    <div>
+        {{end}}
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('{{.Id}}');
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        function getValue(){
+            var input = document.getElementById("inputRecherche").value;
+            // Effacer tout les images
+            // BUG ICI
+            let tmp = [...document.querySelectorAll("#artist")]
+            for (let i in tmp){
+                tmp[i].remove()
+            }
+        }
+    </script>
+</body>
+
+</html>
