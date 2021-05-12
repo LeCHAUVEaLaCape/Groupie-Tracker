@@ -17,9 +17,8 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		errors.New("Error by get data")
 	}
-	search := r.FormValue("search")
-	if !(search == "" && len(data) != 0) {
-		data = Search(search)
+	if !(len(data) != 0) {
+		data = Datass()
 	}
 
 	tmpl, err := template.ParseFiles("index.html")
@@ -34,12 +33,8 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func Search(search string) []grab.MyArtistFull {
-	if search == "" {
-		return grab.ArtistsFull
-	}
-	return nil
-
+func Datass() []grab.MyArtistFull {
+	return grab.ArtistsFull
 }
 
 func main() {
