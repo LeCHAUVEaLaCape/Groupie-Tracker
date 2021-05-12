@@ -1,15 +1,43 @@
 <!doctype html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Groupie Tracker</title>
-        <link rel="stylesheet" type="text/css" href="/CSS/index.css">
-        <link rel="icon" href="CSS/logomusique.png">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    </head>
-    
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" type="text/css" href="/CSS/index.css">
+    <link rel="icon" href="CSS/logomusique.png">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script type="text/javascript" >
+      // Get the modal
+// var modal = document.getElementById();
+
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
+function getValue(){
+  var input = document.getElementById("inputRecherche").value;
+  for(let e of [...document.querySelectorAll("#artist")]){
+    let name = e.attributes.name.textContent
+    if (new RegExp(input).test(name)){
+      // test en normal
+      e.style.display="block"
+    }else if (new RegExp((input.split(" ").map((e)=> e.charAt(0).toUpperCase()+ e.slice(1)) ).join(" ")).test(name)){
+      // test avec chaque 1er lettre en maj pour chaque mots
+      e.style.display="block"
+    }else if (new RegExp(input.toUpperCase()).test(name)){
+      // test avec tout en maj
+      e.style.display="block"
+    }else{
+      e.style.display="none"
+    }
+  }
+}
+    </script>
+</head>
 
 <body>
     <nav class="menu-nav">
@@ -37,77 +65,47 @@
 
     <input type="text" placeholder="" id="inputRecherche">
     <button type="button" onclick="getValue();">Recherche</button>
+
     <div id="cards" class="row">
         {{range .}}
-        <div class="col">
-            <div class="card text-white bg-dark h-100" style="width: 250px;">
-                <img id="img" src={{.Image}} class="card-img-top" alt={{.Name}} onclick="getElementById('{{.ID}}').style.display='block'">
+        <div id ="artist" name="{{.Name}}" class="col">
+            <div style="width: 250px;">
+                <img id="img" src={{.Image}} class="card-img-top" alt={{.Name}} onclick="document.getElementById('{{.Id}}').style.display='block'">
                 <section class="modal">
-                    <div id="{{.ID}}" class="w3-modal">
+
+                    <div id="{{.Id}}" class="w3-modal">
                         <div class="w3-modal-content w3-animate-zoom">
                             <header class="w3-container w3-black"> 
-                                <span onclick="document.getElementById('{{.ID}}').style.display='none'" 
+                                <span onclick="document.getElementById('{{.Id}}').style.display='none'" 
                                     class="w3-button w3-display-topright">&times;
                                 </span>
-                                <h2>{{.Name}}</h2>
+                                <h2>Artiste</h2>
                             </header>
                             <div class="w3-container">
                                 <img src="{{.Image}}" alt="image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Members:</h5>
-                                    {{range .Members}}
-                                    <ul class="card-text">
-                                        <li style="margin-bottom: 0rem;">{{.}}</li>
-                                    </ul>
-                                    {{end}}
-                                    <h5 class="card-title">Creation Date:</h5>
-                                    <p class="card-text"> {{.CreationDate}}</p>
-                                    <h5 class="card-title">First Album Released:</h5>
-                                    <p class="card-text">{{.FirstAlbum}}</p>
-                                    <div>
-                                        {{range $key, $value := .DatesLocations}}
-                                        <div class="artist-data">
-                                            <b>{{$key}}</b>
-                                        </div>
-                                        {{range $value}}
-                                        <div class="data">{{.}}</div>
-                                        <br> {{end}} {{end}}
-                                    </div>
-                                </div>
+                                
+                                {{range .Members}}<h2>{{.}}</h2>{{end}}
+                                {{range .LocationsValue.Locations}}<h2>{{.}}</h2>{{end}}
+                                {{range .ConcertDatesValue.Dates}}<h2>{{.}}</h2>{{end}}
                             </div>
                             <footer class="w3-container w3-black">
                                 <div class="write"> 
-                                    <h2>.</h2>
+                   
                                 </div>
                             </footer>
                         </div>
                     </div>
+
                 </section>
-                <div style="font-size: 30px;">{{.Name}}</div>
+                <div style="font-size: 30px;"></div>
             </div>
         </div>
+    </div>
+    <div>
         {{end}}
     </div>
-    </section>
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        function getValue(){
-            var input = document.getElementById("inputRecherche").value;
-            // Effacer tout les images
-            // BUG ICI
-            let tmp = [...document.querySelectorAll("#artist")]
-            for (let i in tmp){
-                tmp[i].remove()
-            }
-        }
-    </script>
+
+
 </body>
 
 </html>
