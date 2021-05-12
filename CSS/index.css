@@ -57,9 +57,6 @@ section.modal div.imagetest img{
     border-radius: 20%;
     background-color: none;
 }
-section.modal div.w3-modal footer.w3-container{
-    color: black;
-}
 section.modal div.w3-modal footer.w3-container div.write{
     color: black;
 }

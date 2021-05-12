@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Groupie Tracker</title>
-    <link rel="stylesheet" type="text/css" href="/CSS/index.css">
-    <link rel="icon" href="CSS/logomusique.png">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Groupie Tracker</title>
+        <link rel="stylesheet" type="text/css" href="/CSS/index.css">
+        <link rel="icon" href="CSS/logomusique.png">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    
 
 <body>
     <nav class="menu-nav">
@@ -37,23 +37,45 @@
 
     <input type="text" placeholder="" id="inputRecherche">
     <button type="button" onclick="getValue();">Recherche</button>
-
     <div id="cards" class="row">
         {{range .}}
         <div class="col">
-            <div style="width: 250px;">
-                <img id="img" src={{.Image}} class="card-img-top" alt={{.Name}} onclick="document.getElementById('{{.Id}}').style.display='block'">
+            <div class="card text-white bg-dark h-100" style="width: 250px;">
+                <img id="img" src={{.Image}} class="card-img-top" alt={{.Name}} onclick="getElementById('{{.ID}}').style.display='block'">
                 <section class="modal">
-                    <div id="{{.Id}}" class="w3-modal">
+                    <div id="{{.ID}}" class="w3-modal">
                         <div class="w3-modal-content w3-animate-zoom">
                             <header class="w3-container w3-black"> 
-                                <span onclick="document.getElementById('{{.Id}}').style.display='none'" 
+                                <span onclick="document.getElementById('{{.ID}}').style.display='none'" 
                                     class="w3-button w3-display-topright">&times;
                                 </span>
-                                <h2>Artiste</h2>
+                                <h2>{{.Name}}</h2>
                             </header>
                             <div class="w3-container">
                                 <img src="{{.Image}}" alt="image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Members:</h5>
+                                    {{range .Members}}
+                                    <ul class="card-text">
+                                        <li style="margin-bottom: 0rem;">{{.}}</li>
+                                    </ul>
+                                    {{end}}
+                                    <h5 class="card-title">Creation Date:</h5>
+                                    <p class="card-text"> {{.CreationDate}}</p>
+                                    <h5 class="card-title">First Album Released:</h5>
+                                    <p class="card-text">{{.FirstAlbum}}</p>
+                                    <h5 class="card-title">location:</h5>
+                                    <p class="card-text">{{.Locations}}</p>
+                                    <div>
+                                        {{range $key, $value := .DatesLocations}}
+                                        <div class="artist-data">
+                                            <b>{{$key}}</b>
+                                        </div>
+                                        {{range $value}}
+                                        <div class="data">{{.}}</div>
+                                        <br> {{end}} {{end}}
+                                    </div>
+                                </div>
                             </div>
                             <footer class="w3-container w3-black">
                                 <div class="write"> 
@@ -66,14 +88,12 @@
                 <div style="font-size: 30px;">{{.Name}}</div>
             </div>
         </div>
-    </div>
-    <div>
         {{end}}
     </div>
-
+    </section>
     <script>
         // Get the modal
-        var modal = document.getElementById('{{.Id}}');
+        var modal = document.getElementById('id01');
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {

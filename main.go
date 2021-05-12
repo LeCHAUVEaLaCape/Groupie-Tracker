@@ -1,35 +1,49 @@
 package main
 
 import (
-	"encoding/json"
+	"errors"
 	"html/template"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+
+	grab "./data"
 )
 
-var tpl *template.Template
+var data []grab.MyArtistFull
 
-type Artists struct {
-	Id           int      `json:"id"`
-	Image        string   `json:"image"`
-	Name         string   `json:"name"`
-	Members      []string `json:"members"`
-	CreationDate int      `json:"creationDate"`
-	Firstalbum   string   `json:"firstAlbum"`
-	Locations    string   `json:"locations"`
-	ConcertDates string   `json:"concertDates"`
-	Relations    string   `json:"relations"`
+func mainPage(w http.ResponseWriter, r *http.Request) {
+	err := grab.GetData()
+	if err != nil {
+		errors.New("Error by get data")
+	}
+	search := r.FormValue("search")
+	if !(search == "" && len(data) != 0) {
+		data = Search(search)
+	}
+
+	tmpl, err := template.ParseFiles("index.html")
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	if err := tmpl.Execute(w, data); err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
 }
 
-func init() {
-	tpl = template.Must(template.ParseGlob("*.html"))
+func Search(search string) []grab.MyArtistFull {
+	if search == "" {
+		return grab.ArtistsFull
+	}
+	return nil
+
 }
 
-// Error Code à ajouter
 func main() {
-	// Créer le fichier des erreurs
+
 	file, err := os.OpenFile("Errors.txt", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		log.Fatal(err)
@@ -37,25 +51,8 @@ func main() {
 	defer file.Close()
 	log.SetOutput(file)
 
-	// Prend la donnée
-	response, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
-	if err != nil {
-		log.Println(err)
-	}
-	tmp, _ := ioutil.ReadAll(response.Body)
-	var articles []Artists // la donnée
-	err = json.Unmarshal(tmp, &articles)
-	if err != nil {
-		log.Println(err)
-	}
+	http.HandleFunc("/", mainPage)
 
-	// Partie serveur
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		err = tpl.ExecuteTemplate(w, "index.html", articles)
-		if err != nil {
-			log.Println(err)
-		}
-	})
 	fs := http.FileServer(http.Dir("CSS")) //Allow the link of the CSS to the html file
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", fs))
 	err = http.ListenAndServe(":8080", nil)
