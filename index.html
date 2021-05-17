@@ -83,10 +83,14 @@ function getValue(){
                             </header>
                             <div class="w3-container">
                                 <img src="{{.Image}}" alt="image">
-                                
                                 {{range .Members}}<h2>{{.}}</h2>{{end}}
-                                {{range .LocationsValue.Locations}}<h2>{{.}}</h2>{{end}}
-                                {{range .ConcertDatesValue.Dates}}<h2>{{.}}</h2>{{end}}
+                                {{range $key,$value := .RelationsValues.DatesLocations}}
+                                <h2>{{$key}}</h2>
+                                {{range $value}}
+                                <h2>{{.}}</h2>
+                                {{end}}
+                                {{end}}
+                                
                             </div>
                             <footer class="w3-container w3-black">
                                 <div class="write"> 

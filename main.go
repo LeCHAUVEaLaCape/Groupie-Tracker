@@ -11,25 +11,21 @@ import (
 
 var tpl *template.Template
 
-type Locations struct {
-	Locations []string `json:"locations"`
-}
-type ConcertDates struct {
-	Id    int      `json:"id"`
-	Dates []string `json:"dates"`
+type relationValue struct {
+	Id             int                 `json:"id"`
+	DatesLocations map[string][]string `json:"datesLocations"`
 }
 type Artists struct {
-	Id                int          `json:"id"`
-	Image             string       `json:"image"`
-	Name              string       `json:"name"`
-	Members           []string     `json:"members"`
-	CreationDate      int          `json:"creationDate"`
-	Firstalbum        string       `json:"firstAlbum"`
-	Locations         string       `json:"locations"`
-	ConcertDates      string       `json:"concertDates"`
-	Relations         string       `json:"relations"`
-	LocationsValue    Locations    `json:"locationsValues"`
-	ConcertDatesValue ConcertDates `json:"concertDatesValue"`
+	Id              int      `json:"id"`
+	Image           string   `json:"image"`
+	Name            string   `json:"name"`
+	Members         []string `json:"members"`
+	CreationDate    int      `json:"creationDate"`
+	Firstalbum      string   `json:"firstAlbum"`
+	Locations       string   `json:"locations"`
+	ConcertDates    string   `json:"concertDates"`
+	Relations       string   `json:"relations"`
+	RelationsValues relationValue
 }
 
 func init() {
@@ -60,11 +56,7 @@ func getAPIValue(lien string) []byte {
 }
 func getValues(data *[]Artists) {
 	for i := range *data {
-		err := json.Unmarshal(getAPIValue((*data)[i].Locations), &(*data)[i].LocationsValue) //marche
-		if err != nil {
-			log.Println(err)
-		}
-		err = json.Unmarshal(getAPIValue((*data)[i].ConcertDates), &(*data)[i].ConcertDatesValue)
+		err := json.Unmarshal(getAPIValue((*data)[i].Relations), &(*data)[i].RelationsValues) //marche
 		if err != nil {
 			log.Println(err)
 		}
@@ -80,11 +72,10 @@ func main() {
 	}
 	defer file.Close()
 	log.SetOutput(file)
-
+	//
 	var data []Artists
 	getAPI("https://groupietrackers.herokuapp.com/api/artists", &data)
 	getValues(&data)
-
 	// Partie serveur
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		err = tpl.ExecuteTemplate(w, "index.html", data)
