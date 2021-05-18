@@ -81,6 +81,7 @@ func main() {
 		err = tpl.ExecuteTemplate(w, "index.html", data)
 		if err != nil {
 			log.Println(err)
+			http.Error(w, "404 Not Found", 404)
 		}
 	})
 	fs := http.FileServer(http.Dir("CSS")) //Allow the link of the CSS to the html file
