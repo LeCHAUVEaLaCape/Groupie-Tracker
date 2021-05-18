@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/CSS/index.css">
     <link rel="icon" href="CSS/logomusique.png">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@1.2.1/dist/css/grix.min.css">
     <script type="text/javascript" >
       // Get the modal
 // var modal = document.getElementById();
@@ -65,51 +66,54 @@ function getValue(){
 
     <input type="text" placeholder="" id="inputRecherche">
     <button type="button" onclick="getValue();">Recherche</button>
-
-    <div id="cards" class="row">
+    <div id="margin">
+    <div class="grix xs5">
         {{range .}}
-        <div id ="artist" name="{{.Name}}" class="col">
+        <div id="artist" name="{{.Name}}" class="col">
             <div style="width: 250px;">
-                <img id="img" src={{.Image}} class="card-img-top" alt={{.Name}} onclick="document.getElementById('{{.Id}}').style.display='block'">
+                <div id="text"><h2>{{.Name}}</h2></div>
+                <img id="img" src={{.Image}} class="w3-hover-shadow" onclick="document.getElementById('{{.Id}}').style.display='block'">
                 <section class="modal">
-
                     <div id="{{.Id}}" class="w3-modal">
                         <div class="w3-modal-content w3-animate-zoom">
                             <header class="w3-container w3-black"> 
                                 <span onclick="document.getElementById('{{.Id}}').style.display='none'" 
                                     class="w3-button w3-display-topright">&times;
                                 </span>
-                                <h2>Artiste</h2>
+                                <h2>{{.Name}}</h2>
                             </header>
                             <div class="w3-container">
                                 <img src="{{.Image}}" alt="image">
-                                {{range .Members}}<h2>{{.}}</h2>{{end}}
-                                {{range $key,$value := .RelationsValues.DatesLocations}}
-                                <h2>{{$key}}</h2>
-                                {{range $value}}
-                                <h2>{{.}}</h2>
-                                {{end}}
-                                {{end}}
-                                
+                                <div class="card-body">
+                                    <h5 class="card-title">Members:</h5>
+                                    {{range .Members}}
+                                    <ul class="card-text">
+                                        <li style="margin-bottom: 0rem;">{{.}}</li>
+                                    </ul>
+                                    {{end}}
+                                    <h5 class="card-title">Creation Date:</h5>
+                                    <p class="card-text"> {{.CreationDate}}</p>
+                                    <h5 class="card-title">First Album Released:</h5>
+                                    <p class="card-text">{{.Firstalbum}}</p>
+                                    <h5 class="card-title">Locations and Dates</h5>
+                                    {{range $key,$value := .RelationsValues.DatesLocations}}
+                                    <h5>{{$key}}</h5>
+                                    {{range $value}}
+                                    <h5>{{.}}</h5>
+                                    {{end}}
+                                    {{end}}
                             </div>
                             <footer class="w3-container w3-black">
-                                <div class="write"> 
-                   
-                                </div>
                             </footer>
                         </div>
                     </div>
 
                 </section>
-                <div style="font-size: 30px;"></div>
             </div>
-        </div>
-    </div>
-    <div>
+          </div>
         {{end}}
     </div>
-
-
+</div>
 </body>
 
 </html>

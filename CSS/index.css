@@ -32,6 +32,12 @@ section.navbar {
 body {
     margin: 0;
     background-image: url(/CSS/+);
+    background-image: url(/CSS/background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment:fixed;
+
 }
 
 section.headtitle {
@@ -53,13 +59,18 @@ section.headtitle h1.head {
 nav.menu-nav section.navbar a {
     margin-left: 3%;
 }
-section.modal div.imagetest img{
+#img{
+
     border-radius: 20%;
     background-color: none;
 }
-section.modal div.w3-modal footer.w3-container{
-    color: black;
+#margin{
+    margin-left: 5%;
 }
 section.modal div.w3-modal footer.w3-container div.write{
     color: black;
+}
+#text{
+    font-size: 100px;
+    color: white;
 }
