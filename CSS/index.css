@@ -20,8 +20,6 @@ nav.menu-nav ul {
     margin-left: 70%;
 }
 
-
-
 section.navbar {
     display: flex;
     align-items: center;
@@ -31,13 +29,10 @@ section.navbar {
 
 body {
     margin: 0;
-    background-image: url(/CSS/+);
     background-image: url(/CSS/background.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment:fixed;
-
 }
 
 section.headtitle {
@@ -60,9 +55,7 @@ nav.menu-nav section.navbar a {
     margin-left: 3%;
 }
 #img{
-
     border-radius: 20%;
-    background-color: none;
 }
 #margin{
     margin-left: 5%;
