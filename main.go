@@ -15,7 +15,7 @@ type relationValue struct {
 	Id             int                 `json:"id"`
 	DatesLocations map[string][]string `json:"datesLocations"`
 }
-type Artists struct {
+type artists struct {
 	Id              int      `json:"id"`
 	Image           string   `json:"image"`
 	Name            string   `json:"name"`
@@ -28,66 +28,69 @@ type Artists struct {
 	RelationsValues relationValue
 }
 
-func init() {
-	tpl = template.Must(template.ParseGlob("*.html"))
+func LogError(err error) bool {
+	if err != nil {
+		log.Println(err)
+		return true
+	}
+	return false
 }
-func getAPI(lien string, adresseArtists *[]Artists) {
+func init() {
+	tpl = template.Must(template.ParseGlob("assets/html/*.html"))
+}
+func GetAPI(lien string, adresseArtists *[]artists) {
 	// Prend la donnée
 	response, err := http.Get(lien)
-	if err != nil {
-		log.Println(err)
-	}
-	tmp, _ := ioutil.ReadAll(response.Body)
+	LogError(err)
+	tmp, err := ioutil.ReadAll(response.Body)
+	LogError(err)
 	err = json.Unmarshal(tmp, &adresseArtists)
-	if err != nil {
-		log.Println(err)
-	}
+	LogError(err)
 }
 func getAPIValue(lien string) []byte {
 	response, err := http.Get(lien)
-	if err != nil {
-		log.Println(err)
-	}
+	LogError(err)
 	tmp, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		log.Println(err)
-	}
+	LogError(err)
 	return tmp
 }
-func getValues(data *[]Artists) {
+func GetValues(data *[]artists) {
 	for i := range *data {
 		err := json.Unmarshal(getAPIValue((*data)[i].Relations), &(*data)[i].RelationsValues) //marche
-		if err != nil {
-			log.Println(err)
-		}
+		LogError(err)
 	}
 }
 
 // Error Code à ajouter
 func main() {
-	// Créer le fichier des erreurs
+	// Créer/charge le fichier des erreurs
 	file, err := os.OpenFile("Errors.txt", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
-	if err != nil {
-		log.Fatal(err)
-	}
+	LogError(err)
 	defer file.Close()
 	log.SetOutput(file)
-	//
-	var data []Artists
-	getAPI("https://groupietrackers.herokuapp.com/api/artists", &data)
-	getValues(&data)
+	//	Charge les données de l'API
+	var data []artists
+	GetAPI("https://groupietrackers.herokuapp.com/api/artists", &data)
+	GetValues(&data)
 	// Partie serveur
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		err = tpl.ExecuteTemplate(w, "index.html", data)
-		if err != nil {
-			log.Println(err)
+	handleur := func(w http.ResponseWriter, r *http.Request) {
+		err := tpl.ExecuteTemplate(w, "index.html", data)
+		if LogError(err) {
 			http.Error(w, "404 Not Found", 404)
 		}
-	})
-	fs := http.FileServer(http.Dir("CSS")) //Allow the link of the CSS to the html file
+	}
+	map_handleur := func(w http.ResponseWriter, r *http.Request) {
+		err := tpl.ExecuteTemplate(w, "map.html", nil)
+		if LogError(err) {
+			http.Error(w, "404 Not Found", 404)
+		}
+
+	}
+	http.HandleFunc("/", handleur)
+	http.HandleFunc("/map", map_handleur)
+	//Allow the link of the CSS to the html file
+	fs := http.FileServer(http.Dir("CSS"))
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", fs))
 	err = http.ListenAndServe(":8080", nil)
-	if err != nil {
-		log.Println(err)
-	}
+	LogError(err)
 }

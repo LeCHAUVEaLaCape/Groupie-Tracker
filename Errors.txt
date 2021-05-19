@@ -1,3 +1,39 @@
-2021/05/11 01:07:24 http: superfluous response.WriteHeader call from main.mainPage (main.go:31)
-2021/05/11 01:09:06 http: superfluous response.WriteHeader call from main.mainPage (main.go:31)
-2021/05/11 01:10:19 http: superfluous response.WriteHeader call from main.mainPage (main.go:31)
+2021/05/07 01:05:34 listen tcp :8080: bind: Une seule utilisation de chaque adresse de socket (protocole/adresse réseau/port) est habituellement autorisée.
+2021/05/07 01:06:06 listen tcp :8080: bind: Une seule utilisation de chaque adresse de socket (protocole/adresse réseau/port) est habituellement autorisée.
+2021/05/10 15:03:32 template: index.html:76:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/10 15:15:35 template: index.html:76:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/10 15:15:47 template: index.html:76:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/10 15:15:49 template: index.html:76:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/10 15:15:52 template: index.html:76:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/10 15:15:57 template: index.html:76:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/10 16:32:54 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/10 16:46:19 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/10 16:52:02 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/11 09:18:46 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/11 09:27:30 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/11 09:27:42 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/11 09:29:53 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/11 10:42:58 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/11 10:44:51 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/11 10:45:36 template: index.html:77:47: executing "index.html" at <.Id>: can't evaluate field Id in type []main.Artists
+2021/05/11 10:47:06 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:47:15 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:47:16 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:47:16 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:47:16 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:47:16 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:47:28 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:48:07 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:48:33 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:48:40 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:48:40 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/11 10:50:51 template: index.html:46:120: executing "index.html" at <.ID>: can't evaluate field ID in type main.Artists
+2021/05/12 12:33:59 http: superfluous response.WriteHeader call from main.mainPage (main.go:30)
+2021/05/17 09:45:24 http: superfluous response.WriteHeader call from main.mainPage (main.go:30)
+2021/05/17 09:50:20 http: superfluous response.WriteHeader call from main.mainPage (main.go:30)
+2021/05/17 10:14:29 http: superfluous response.WriteHeader call from main.mainPage (main.go:30)
+2021/05/17 10:15:07 http: superfluous response.WriteHeader call from main.mainPage (main.go:30)
+2021/05/17 10:16:33 http: superfluous response.WriteHeader call from main.mainPage (main.go:30)
+2021/05/17 10:50:57 template: index.html:89:55: executing "index.html" at <.FirstAlbum>: can't evaluate field FirstAlbum in type main.Artists
+2021/05/17 10:52:36 template: index.html:96:59: executing "index.html" at <.FirstAlbum>: can't evaluate field FirstAlbum in type main.Artists
+2021/05/17 11:14:18 template: index.html:102:66: executing "index.html" at <.ConcertDatesValue.Dates>: can't evaluate field ConcertDatesValue in type string
