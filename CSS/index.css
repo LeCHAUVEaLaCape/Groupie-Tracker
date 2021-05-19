@@ -1,21 +1,3 @@
-nav.menu-nav ul li.btn {
-    list-style-type: none;
-    background-color: black;
-    display: inline-block;
-}
-
-nav.menu-nav ul li.btn:hover a{
-    background-color: gray;
-}
-
-nav.menu-nav ul li.btn a {
-    color: white;
-    text-decoration: none;
-    font-size: x-large;
-    padding: 20px;
-    margin-left: 2%;
-}
-
 nav.menu-nav ul {
     margin-left: 70%;
 }
@@ -28,12 +10,11 @@ section.navbar {
 }
 
 body {
-    /* margin: 0; */
+    margin: 0;
     background-image: url(/CSS/background.png);
-    background-position: center;
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-position: center;
 }
 
 section.headtitle {
@@ -45,7 +26,6 @@ section.headtitle {
     margin: 0;
 
 }
-
 section.headtitle h1.head {
     color: white;
     text-align: center;
@@ -67,4 +47,7 @@ section.modal div.w3-modal footer.w3-container div.write{
 #text{
     font-size: 100px;
     color: white;
+}
+#inputRecherche {
+    margin-left: 40%;
 }

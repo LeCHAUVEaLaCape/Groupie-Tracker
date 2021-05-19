@@ -15,7 +15,7 @@ type relationValue struct {
 	Id             int                 `json:"id"`
 	DatesLocations map[string][]string `json:"datesLocations"`
 }
-type artists struct {
+type Artists struct {
 	Id              int      `json:"id"`
 	Image           string   `json:"image"`
 	Name            string   `json:"name"`
@@ -28,61 +28,66 @@ type artists struct {
 	RelationsValues relationValue
 }
 
-func LogError(err error) bool {
-	if err != nil {
-		log.Println(err)
-		return true
-	}
-	return false
-}
 func init() {
 	tpl = template.Must(template.ParseGlob("*.html"))
 }
-func GetAPI(lien string, adresseArtists *[]artists) {
+func getAPI(lien string, adresseArtists *[]Artists) {
 	// Prend la donnée
 	response, err := http.Get(lien)
-	LogError(err)
-	tmp, err := ioutil.ReadAll(response.Body)
-	LogError(err)
+	if err != nil {
+		log.Println(err)
+	}
+	tmp, _ := ioutil.ReadAll(response.Body)
 	err = json.Unmarshal(tmp, &adresseArtists)
-	LogError(err)
+	if err != nil {
+		log.Println(err)
+	}
 }
 func getAPIValue(lien string) []byte {
 	response, err := http.Get(lien)
-	LogError(err)
+	if err != nil {
+		log.Println(err)
+	}
 	tmp, err := ioutil.ReadAll(response.Body)
-	LogError(err)
+	if err != nil {
+		log.Println(err)
+	}
 	return tmp
 }
-func GetValues(data *[]artists) {
+func getValues(data *[]Artists) {
 	for i := range *data {
 		err := json.Unmarshal(getAPIValue((*data)[i].Relations), &(*data)[i].RelationsValues) //marche
-		LogError(err)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }
 
 // Error Code à ajouter
 func main() {
-	// Créer/charge le fichier des erreurs
+	// Créer le fichier des erreurs
 	file, err := os.OpenFile("Errors.txt", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
-	LogError(err)
+	if err != nil {
+		log.Fatal(err)
+	}
 	defer file.Close()
 	log.SetOutput(file)
-	//	Charge les données de l'API
-	var data []artists
-	GetAPI("https://groupietrackers.herokuapp.com/api/artists", &data)
-	GetValues(&data)
+	//
+	var data []Artists
+	getAPI("https://groupietrackers.herokuapp.com/api/artists", &data)
+	getValues(&data)
 	// Partie serveur
-	handleur := func(w http.ResponseWriter, r *http.Request) {
-		err := tpl.ExecuteTemplate(w, "index.html", data)
-		if LogError(err) {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		err = tpl.ExecuteTemplate(w, "index.html", data)
+		if err != nil {
+			log.Println(err)
 			http.Error(w, "404 Not Found", 404)
 		}
-	}
-	http.HandleFunc("/", handleur)
-	//Allow the link of the CSS to the html file
-	fs := http.FileServer(http.Dir("CSS"))
+	})
+	fs := http.FileServer(http.Dir("CSS")) //Allow the link of the CSS to the html file
 	http.Handle("/CSS/", http.StripPrefix("/CSS/", fs))
 	err = http.ListenAndServe(":8080", nil)
-	LogError(err)
+	if err != nil {
+		log.Println(err)
+	}
 }
