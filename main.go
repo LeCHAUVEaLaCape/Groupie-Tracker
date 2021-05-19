@@ -36,7 +36,7 @@ func LogError(err error) bool {
 	return false
 }
 func init() {
-	tpl = template.Must(template.ParseGlob("assets/html/*.html"))
+	tpl = template.Must(template.ParseGlob("*.html"))
 }
 func GetAPI(lien string, adresseArtists *[]artists) {
 	// Prend la donnée
@@ -80,7 +80,8 @@ func main() {
 		}
 	}
 	map_handleur := func(w http.ResponseWriter, r *http.Request) {
-		err := tpl.ExecuteTemplate(w, "map.html", nil)
+		lieu := r.FormValue("teste")
+		err := tpl.ExecuteTemplate(w, "map.html", lieu)
 		if LogError(err) {
 			http.Error(w, "404 Not Found", 404)
 		}

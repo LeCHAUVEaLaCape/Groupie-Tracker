@@ -37,3 +37,21 @@
 2021/05/17 10:50:57 template: index.html:89:55: executing "index.html" at <.FirstAlbum>: can't evaluate field FirstAlbum in type main.Artists
 2021/05/17 10:52:36 template: index.html:96:59: executing "index.html" at <.FirstAlbum>: can't evaluate field FirstAlbum in type main.Artists
 2021/05/17 11:14:18 template: index.html:102:66: executing "index.html" at <.ConcertDatesValue.Dates>: can't evaluate field ConcertDatesValue in type string
+2021/05/19 14:29:11 write tcp 127.0.0.1:8080->127.0.0.1:53293: wsasend: Une connexion existante a dû être fermée par l’hôte distant.
+2021/05/19 14:29:11 http: superfluous response.WriteHeader call from main.main.func1 (main.go:79)
+2021/05/19 15:05:25 write tcp 127.0.0.1:8080->127.0.0.1:53753: wsasend: Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte.
+2021/05/19 15:05:25 http: superfluous response.WriteHeader call from main.main.func1 (main.go:79)
+2021/05/19 15:07:47 write tcp 127.0.0.1:8080->127.0.0.1:53792: wsasend: Une connexion existante a dû être fermée par l’hôte distant.
+2021/05/19 15:07:47 http: superfluous response.WriteHeader call from main.main.func1 (main.go:79)
+2021/05/19 15:09:36 write tcp 127.0.0.1:8080->127.0.0.1:53809: wsasend: Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte.
+2021/05/19 15:09:36 http: superfluous response.WriteHeader call from main.main.func1 (main.go:79)
+2021/05/19 15:11:11 write tcp 127.0.0.1:8080->127.0.0.1:53835: wsasend: Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte.
+2021/05/19 15:11:11 http: superfluous response.WriteHeader call from main.main.func1 (main.go:79)
+2021/05/19 15:12:10 write tcp 127.0.0.1:8080->127.0.0.1:53846: wsasend: Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte.
+2021/05/19 15:12:10 http: superfluous response.WriteHeader call from main.main.func1 (main.go:79)
+2021/05/19 15:21:42 write tcp 127.0.0.1:8080->127.0.0.1:53962: wsasend: Une connexion existante a dû être fermée par l’hôte distant.
+2021/05/19 15:21:42 http: superfluous response.WriteHeader call from main.main.func1 (main.go:79)
+2021/05/19 15:22:59 write tcp 127.0.0.1:8080->127.0.0.1:53966: wsasend: Une connexion existante a dû être fermée par l’hôte distant.
+2021/05/19 15:22:59 http: superfluous response.WriteHeader call from main.main.func1 (main.go:79)
+2021/05/19 15:26:35 write tcp 127.0.0.1:8080->127.0.0.1:54007: wsasend: Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte.
+2021/05/19 15:26:35 http: superfluous response.WriteHeader call from main.main.func1 (main.go:79)

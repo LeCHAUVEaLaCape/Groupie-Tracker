@@ -1,0 +1,69 @@
+nav.menu-nav ul {
+    margin-left: 70%;
+}
+
+section.navbar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: black;
+}
+
+section.navbar ul li.btn {
+    list-style-type: none;
+}
+
+section.navbar ul li.btn a {
+    color: white;
+    text-decoration: none;
+    padding: 30px;
+    font-size: 20px;
+}
+
+section.navbar ul li.btn a:hover {
+    background-color: gray;
+}
+
+body {
+    margin: 0;
+    background-image: url(/CSS/background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+section.headtitle {
+    background-image: url(/CSS/fondhead.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 100px;
+    margin: 0;
+
+}
+section.headtitle h1.head {
+    color: white;
+    text-align: center;
+    font-size: 60px;
+}
+
+nav.menu-nav section.navbar a {
+    margin-left: 3%;
+}
+#img{
+    border-radius: 20%;
+}
+#margin{
+    margin-left: 5%;
+}
+section.modal div.w3-modal footer.w3-container div.write{
+    color: black;
+}
+#text{
+    font-size: 100px;
+    color: white;
+}
+#inputRecherche {
+    margin-left: 40%;
+}
